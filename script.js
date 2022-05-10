@@ -2,58 +2,68 @@ let numero
 const valorEntrada = 870
 const montoFinal = []
 
+class eleccionPelicula {
+    constructor (id, nombre){
+        this.id = id
+        this.nombre = nombre
+    }
+}
+
 class candy {
     constructor (nombre, precio){
         this.nombre = nombre
         this.precio = precio
     }
 }
+/*
+//elección de película
 
-//mensaje de bienvenida
-let bienvenida = "Bienvenido a PelisFan.\nA continuación, le recomendaremos una película al azar que esté en cartelera, luego indíquenos la cantidad de acompañantes y seleccione un producto del candy para que le digamos el monto final de su visita al cine. Gracias!"
-const imprimirBienvenida = (mensajeUsuario) => {
-    alert(mensajeUsuario)
-}
-imprimirBienvenida(bienvenida)
+const peliculas = []
 
-//elección de película a través de un do while y switch
-do {
-    numero = parseFloat(prompt("Ingrese un número del 1 al 5 para una recomendación de pelicula que se encuentre en cartelera"))
+let usuarioEleccion = parseFloat(prompt("Ingrese un número del 1 al 5 para una recomendación de pelicula que se encuentre en cartelera"))
 
-    if(numero < 1 || numero > 5 || (isNaN(numero))) {
-        alert("Solo números del 1 al 5")
-    }
+const pelicula1 = new eleccionPelicula (1, "Animales Fantásticos 3")
+const pelicula2 = new eleccionPelicula (2, "Morbius")
+const pelicula3 = new eleccionPelicula (3, "Batman")
+const pelicula4 = new eleccionPelicula (4, "Sonic 2")
+const pelicula5 = new eleccionPelicula (5, "La ciudad perdida")
 
-} while (numero < 1 || numero > 5 || (isNaN(numero)))
+if (usuarioEleccion == 1) {
+    peliculas.push (pelicula1)
+    } if (usuarioEleccion == 2 ){
+        peliculas.push (pelicula2)
+        } if (usuarioEleccion == 3) {
+            peliculas.push (pelicula3)
+            } if (usuarioEleccion == 4) {
+                peliculas.push (pelicula4)
+                } if (usuarioEleccion == 5) {
+                    peliculas.push (pelicula5)
+                    } 
 
-switch(numero) {
-    case 1:
-        alert("Su recomendación es Animales Fantasticos 3")
-        break
-    case 2:
-        alert("Su recomendación es Morbius")
-        break
-    case 3:
-        alert("Su recomendación es Batman")
-        break
-    case 4:
-        alert("Su recomendación es Sonic 2")
-        break
-    case 5:
-        alert("Su recomendación es La ciudad perdida")
-        break
-}
+let peliculaElegida 
+
+peliculas.forEach((peliculas) => {
+    peliculaElegida = peliculas.nombre
+})
+*/
 
 //elección de número de acompañantes y cálculo del valor de entradas mediante función.
 
-let personas = parseFloat(prompt("Ingrese el número de acompañantes con los que irá al cine"))
+let personas
+let formCantidad = document.getElementById('formCantidad')
 
-const calcularEntrada = (monto) => monto * valorEntrada
+formCantidad.addEventListener('submit', (event) => {
+    event.preventDefault()
+    personas = document.getElementById('idCantidad').value
+    const calcularEntrada = (monto) => monto * valorEntrada
+    let resultado = calcularEntrada(personas)
+    montoFinal.push(new candy("Entrada", resultado))
+    console.log(resultado)
+    formCantidad.reset()
+})
 
-let resultado = calcularEntrada(personas)
 
-montoFinal.push(new candy("Entrada", resultado))
-
+/*
 //elección de producto del candy.
 
 let acompaniamiento
@@ -82,9 +92,9 @@ switch(acompaniamiento) {
 
 let precioTotal = montoFinal.reduce ((valPrevio, valActual) => valPrevio + valActual.precio, 0)
 
-let mensajeFinal = `El monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!`
+let mensajeFinal = `Su pelicula sorteada es ${peliculaElegida} y el monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!`
 const imprimirFinal = (mensajeUsuarioFinal) => {
     alert(mensajeUsuarioFinal)
 }
 
-imprimirFinal(mensajeFinal)
+imprimirFinal(mensajeFinal)*/
