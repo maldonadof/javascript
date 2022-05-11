@@ -20,7 +20,7 @@ class candy {
 
 const peliculas = []
 
-let usuarioEleccion = parseFloat(prompt("Ingrese un número del 1 al 5 para una recomendación de pelicula que se encuentre en cartelera"))
+let usuarioEleccion = parseFloat(prompt(""))
 
 const pelicula1 = new eleccionPelicula (1, "Animales Fantásticos 3")
 const pelicula2 = new eleccionPelicula (2, "Morbius")
@@ -47,13 +47,41 @@ peliculas.forEach((peliculas) => {
 })
 */
 
-//elección de número de acompañantes y cálculo del valor de entradas mediante función.
+
 
 let personas
+let usuarioEleccion
+let peliculaElegida 
 let formCantidad = document.getElementById('formCantidad')
+const peliculas = []
 
 formCantidad.addEventListener('submit', (event) => {
     event.preventDefault()
+    //elección de película
+    usuarioEleccion = document.getElementById('idPeliculas').value
+    const pelicula1 = new eleccionPelicula (1, "Animales Fantásticos 3")
+    const pelicula2 = new eleccionPelicula (2, "Morbius")
+    const pelicula3 = new eleccionPelicula (3, "Batman")
+    const pelicula4 = new eleccionPelicula (4, "Sonic 2")
+    const pelicula5 = new eleccionPelicula (5, "La ciudad perdida")
+    if (usuarioEleccion == 1) {
+        peliculas.push (pelicula1)
+        } if (usuarioEleccion == 2 ){
+            peliculas.push (pelicula2)
+            } if (usuarioEleccion == 3) {
+                peliculas.push (pelicula3)
+                } if (usuarioEleccion == 4) {
+                    peliculas.push (pelicula4)
+                    } if (usuarioEleccion == 5) {
+                        peliculas.push (pelicula5)
+                        } 
+    peliculas.forEach((peliculas) => {
+        peliculaElegida = peliculas.nombre})
+    
+    console.log(peliculaElegida)
+
+
+    //elección de número de acompañantes y cálculo del valor de entradas mediante función.
     personas = document.getElementById('idCantidad').value
     const calcularEntrada = (monto) => monto * valorEntrada
     let resultado = calcularEntrada(personas)
