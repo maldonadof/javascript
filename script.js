@@ -1,12 +1,4 @@
-let numero
-let personas
-let usuarioEleccion
-let peliculaElegida 
-let acompaniamiento
-let precioTotal
-const valorEntrada = 870
-const peliculas = []
-const montoFinal = []
+
 
 class eleccionPelicula {
     constructor (id, nombre){
@@ -14,6 +6,12 @@ class eleccionPelicula {
         this.nombre = nombre
     }
 }
+const pelicula1 = new eleccionPelicula (1, "Animales Fantásticos 3")
+const pelicula2 = new eleccionPelicula (2, "Morbius")
+const pelicula3 = new eleccionPelicula (3, "Batman")
+const pelicula4 = new eleccionPelicula (4, "Sonic 2")
+const pelicula5 = new eleccionPelicula (5, "La ciudad perdida")
+const peliculas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5]
 
 class candy {
     constructor (nombre, precio){
@@ -22,32 +20,27 @@ class candy {
     }
 }
 
+
+let numero
+let personas
+let usuarioEleccion
+let peliculaElegida = []
+let acompaniamiento
+let precioTotal
+const valorEntrada = 870
+const montoFinal = []
+let peliculaSeleccionada
+
 let formCantidad = document.getElementById('formCantidad')
 
 formCantidad.addEventListener('submit', (event) => {
     event.preventDefault()
     //elección de película
     usuarioEleccion = document.getElementById('idPeliculas').value
-    const pelicula1 = new eleccionPelicula (1, "Animales Fantásticos 3")
-    const pelicula2 = new eleccionPelicula (2, "Morbius")
-    const pelicula3 = new eleccionPelicula (3, "Batman")
-    const pelicula4 = new eleccionPelicula (4, "Sonic 2")
-    const pelicula5 = new eleccionPelicula (5, "La ciudad perdida")
-    if (usuarioEleccion == 1) {
-        peliculas.push (pelicula1)
-        } if (usuarioEleccion == 2 ){
-            peliculas.push (pelicula2)
-            } if (usuarioEleccion == 3) {
-                peliculas.push (pelicula3)
-                } if (usuarioEleccion == 4) {
-                    peliculas.push (pelicula4)
-                    } if (usuarioEleccion == 5) {
-                        peliculas.push (pelicula5)
-                        } 
-    peliculas.forEach((peliculas) => {
+    peliculaSeleccionada = peliculas.find(peli=>peli.id == usuarioEleccion)
+    peliculaElegida.push(peliculaSeleccionada)
+    peliculaElegida.forEach((peliculas) => {
         peliculaElegida = peliculas.nombre})
-    
-    console.log(peliculaElegida)
 
 
     //elección de número de acompañantes y cálculo del valor de entradas mediante función.
@@ -55,7 +48,6 @@ formCantidad.addEventListener('submit', (event) => {
     const calcularEntrada = (monto) => monto * valorEntrada
     let resultado = calcularEntrada(personas)
     montoFinal.push(new candy("Entrada", resultado))
-    console.log(resultado)
     
 
     //elección de producto del candy.
@@ -78,13 +70,7 @@ formCantidad.addEventListener('submit', (event) => {
 
     precioTotal = montoFinal.reduce ((valPrevio, valActual) => valPrevio + valActual.precio, 0)
 
-    console.log(precioTotal)
+    divResultado.innerHTML += `<p>Su pelicula sorteada es ${peliculaElegida} y el monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!</p>`
     formCantidad.reset()
 })
 
-let idResultado = document.getElementById('idResultado')
-let divResultado = document.getElementById('divResultado')
-
-idResultado.addEventListener('click', () => {
-    divResultado.innerHTML += `<p>Su pelicula sorteada es ${peliculaElegida} y el monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!</p>`
-})
