@@ -30,32 +30,49 @@ eleccionCandy = [candy1, candy2, candy3]
 let numero
 let personas
 let usuarioEleccion
-let peliculaElegida = []
 let acompaniamiento
 let precioTotal
 const valorEntrada = 870
 const montoFinal = []
-let peliculaSeleccionada
+let peliculaElegida
+let eleccion
+
+if(localStorage.getItem('eleccion')){
+    eleccion = localStorage.getItem('eleccion')
+} else {
+    localStorage.setItem('eleccion', peliculaElegida)
+}
+
+let movies = document.getElementById('movies')
+
+peliculas.forEach ((peli) => {
+    movies.innerHTML += `
+    <div class="card" style="width: 15rem;" id="p${peli.id}" >
+    <img src="./img/P${peli.id}.jpg" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title">${peli.nombre}</h5>
+      <button id="boton${peli.id}"class="btn btn-dark">Elegir</button>
+    </div>
+  </div>
+    `
+})
+
+peliculas.forEach ((peli) => {
+    document.getElementById(`boton${peli.id}`).addEventListener('click', () => {
+        peliculaElegida= `${peli.nombre}`
+    })
+})
 
 let formCantidad = document.getElementById('formCantidad')
 
 formCantidad.addEventListener('submit', (event) => {
     event.preventDefault()
-    //elección de película
-    usuarioEleccion = document.getElementById('idPeliculas').value
-    peliculaSeleccionada = peliculas.find(peli=>peli.id == usuarioEleccion)
-    peliculaElegida.push(peliculaSeleccionada)
-    peliculaElegida.forEach((peliculas) => {
-        peliculaElegida = peliculas.nombre})
-
-
     //elección de número de acompañantes y cálculo del valor de entradas mediante función.
     personas = document.getElementById('idCantidad').value
     const calcularEntrada = (monto) => monto * valorEntrada
     let resultado = calcularEntrada(personas)
     montoFinal.push(new candy("Entrada", resultado))
     
-
     //elección de producto del candy.
     acompaniamiento =  document.getElementById('idAcompaniamiento').value
     acompaniamientoSeleccionado = eleccionCandy.find(candy=>candy.id == acompaniamiento)
@@ -63,7 +80,7 @@ formCantidad.addEventListener('submit', (event) => {
 
     precioTotal = montoFinal.reduce ((valPrevio, valActual) => valPrevio + valActual.precio, 0)
 
-    divResultado.innerHTML += `<p>Su pelicula sorteada es ${peliculaElegida} y el monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!</p>`
+    divResultado.innerHTML += `<p>Su pelicula elegida es ${peliculaElegida} y el monto total de su visita al cine es de ${precioTotal}. ¡Gracias por usar nuestros servicios!</p>`
     formCantidad.reset()
 })
 
